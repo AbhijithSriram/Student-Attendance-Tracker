@@ -1,0 +1,25 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521/XEPDB1</property>
+        <property name="hibernate.connection.username">system</property>
+        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="com.group1.model.Professor"/>
+        <mapping class="com.group1.model.Student"/>
+        <mapping class="com.group1.model.Course"/>
+        <mapping class="com.group1.model.AcademicPeriod"/>
+        <mapping class="com.group1.model.CourseSection"/>
+        <mapping class="com.group1.model.Enrollment"/>
+        <mapping class="com.group1.model.ClassSession"/>
+        <mapping class="com.group1.model.Attendance"/>
+    </session-factory>
+</hibernate-configuration>
