@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="500.0" prefWidth="700.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group1.ui.ReportsController">
+   <children>
+      <Label text="Attendance Reports">
+         <font><Font name="System Bold" size="18.0" /></font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" spacing="10.0">
+         <children>
+            <Label text="Select Course Section:" />
+            <ComboBox fx:id="courseSectionComboBox" prefWidth="400.0" promptText="Select a section to generate report" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="10.0">
+          <children>
+              <Label text="Start Date:" />
+              <DatePicker fx:id="startDatePicker" />
+              <Label text="End Date:" />
+              <DatePicker fx:id="endDatePicker" />
+              <Button onAction="#handleGenerateReport" text="Generate Report" />
+          </children>
+          <VBox.margin><Insets top="5.0" bottom="5.0" /></VBox.margin>
+      </HBox>
+      <TableView fx:id="reportTableView" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="regNumberColumn" prefWidth="150.0" text="Registration #" />
+          <TableColumn fx:id="studentNameColumn" prefWidth="250.0" text="Student Name" />
+          <TableColumn fx:id="totalClassesColumn" prefWidth="100.0" text="Total Classes" />
+          <TableColumn fx:id="classesAttendedColumn" prefWidth="100.0" text="Attended" />
+          <TableColumn fx:id="percentageColumn" prefWidth="100.0" text="Percentage" />
+        </columns>
+      </TableView>
+   </children>
+   <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+</VBox>
