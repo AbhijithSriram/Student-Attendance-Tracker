@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="450.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group1.ui.RegisterController">
+   <children>
+      <Label text="Professor Registration">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameField" maxWidth="250.0" promptText="Full Name" />
+      <TextField fx:id="employeeIdField" maxWidth="250.0" promptText="Employee ID" />
+      <TextField fx:id="emailField" maxWidth="250.0" promptText="Email Address" />
+      <PasswordField fx:id="passwordField" maxWidth="250.0" promptText="Password" />
+      <Button fx:id="registerButton" onAction="#handleRegister" text="Register" />
+      <Label fx:id="messageLabel" wrapText="true" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

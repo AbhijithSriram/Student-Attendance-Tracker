@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group1.ui.ManageStudentsController">
+   <top>
+      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Student Management">
+               <font><Font name="System Bold" size="20.0" /></font>
+            </Label>
+            <GridPane hgap="10.0" vgap="5.0">
+               <children>
+                  <Label text="Reg. Number:" />
+                  <TextField fx:id="regNumberField" promptText="Registration Number" GridPane.columnIndex="1" />
+                  <Label text="Full Name:" GridPane.rowIndex="1" />
+                  <TextField fx:id="nameField" prefWidth="250.0" promptText="Student's Full Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Button onAction="#handleSaveStudent" text="Save Student" />
+                  <Button onAction="#handleClearForm" text="Clear Form" />
+                  <Button onAction="#handleDeleteStudent" text="Delete Selected Student" />
+               </children>
+            </HBox>
+            <Label fx:id="messageLabel" />
+         </children>
+         <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+      </VBox>
+   </top>
+   <center>
+      <TableView fx:id="studentTableView" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="regNumberColumn" prefWidth="200.0" text="Registration Number" />
+          <TableColumn fx:id="nameColumn" prefWidth="380.0" text="Name" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

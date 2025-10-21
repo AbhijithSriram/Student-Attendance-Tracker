@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group1.ui.DashboardController">
+   <top>
+      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+               <children>
+                  <Button onAction="#handleLogout" text="Logout" />
+               </children>
+            </HBox>
+            <Label fx:id="welcomeLabel" text="Welcome, Professor!">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label text="Please select an option to continue." />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button onAction="#openMarkAttendanceWindow" prefHeight="35.0" prefWidth="200.0" text="Mark Attendance" />
+            <Button onAction="#openManageSessionsWindow" prefHeight="35.0" prefWidth="200.0" text="Manage Sessions" />
+            <Button onAction="#openManageCoursesWindow" prefHeight="35.0" prefWidth="200.0" text="Manage Courses" />
+            <Button onAction="#openManageStudentsWindow" prefHeight="35.0" prefWidth="200.0" text="Manage Students" />
+            <Button onAction="#openReportsWindow" prefHeight="35.0" prefWidth="200.0" text="View Reports" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
