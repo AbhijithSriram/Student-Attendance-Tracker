@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class DashboardController {
-    private AttendanceTrackerApp app; // Reference to the main application
+    private AttendanceTrackerApp app;
     @FXML private Label welcomeLabel;
     private Professor loggedInProfessor;
 
@@ -24,7 +24,7 @@ public class DashboardController {
 
     @FXML
     private void handleLogout() {
-        app.showLoginScreen(); // Call main app to switch back to login
+        app.showLoginScreen();
     }
     
     public void initData(Professor professor) {
@@ -93,7 +93,6 @@ public class DashboardController {
         }
     }
 
-    // Functional interface for cleaner controller initialization
     @FunctionalInterface
     interface ControllerInitializer {
         void init(Object controller);

@@ -42,22 +42,17 @@ public class CourseSectionDaoImpl implements CourseSectionDao {
             transaction = session.beginTransaction();
             CourseSection section = session.get(CourseSection.class, sectionId);
             if (section != null) {
-                // To avoid foreign key errors, delete dependent records first
-                // 1. Delete Attendance records linked to sessions of this section
                 session.createMutationQuery(
                     "delete from Attendance where classSession.session_id in " +
                     "(select session_id from ClassSession where courseSection.section_id = :sectId)")
                     .setParameter("sectId", sectionId).executeUpdate();
 
-                // 2. Delete Class Sessions for this section
                 session.createMutationQuery("delete from ClassSession where courseSection.section_id = :sectId")
                     .setParameter("sectId", sectionId).executeUpdate();
 
-                // 3. Delete Enrollments for this section
                 session.createMutationQuery("delete from Enrollment where courseSection.section_id = :sectId")
                     .setParameter("sectId", sectionId).executeUpdate();
 
-                // 4. Finally, delete the course section itself
                 session.remove(section);
             }
             transaction.commit();

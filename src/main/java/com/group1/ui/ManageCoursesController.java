@@ -22,7 +22,6 @@ import java.util.Optional;
 
 public class ManageCoursesController {
     
-    // Base Course Components
     @FXML private TextField courseCodeField;
     @FXML private TextField courseNameField;
     @FXML private TextField creditsField;
@@ -31,7 +30,6 @@ public class ManageCoursesController {
     @FXML private TableColumn<Course, String> courseNameCol;
     @FXML private TableColumn<Course, Integer> creditsCol;
     
-    // Course Section Components
     @FXML private ComboBox<Course> sectionCourseComboBox;
     @FXML private ComboBox<AcademicPeriod> sectionPeriodComboBox;
     @FXML private TextField sectionNameField;
@@ -52,29 +50,25 @@ public class ManageCoursesController {
 
     @FXML
     public void initialize() {
-        // Base Course Table
         courseCodeCol.setCellValueFactory(new PropertyValueFactory<>("course_code"));
         courseNameCol.setCellValueFactory(new PropertyValueFactory<>("course_name"));
         creditsCol.setCellValueFactory(new PropertyValueFactory<>("credits"));
         courseTableView.setItems(courseList);
         
-        // Course Section Table
         sectionCourseCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCourse().getCourse_name()));
         sectionNameCol.setCellValueFactory(new PropertyValueFactory<>("section_name"));
         sectionPeriodCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAcademicPeriod().getAcademic_year() + " - " + cellData.getValue().getAcademicPeriod().getSemester()));
         sectionTableView.setItems(sectionList);
         
-        // Load data into tables and combo boxes
         loadAllCourses();
         loadAllPeriods();
         
-        // Listener to populate course form when a row is selected
         courseTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> {
             if (newV != null) {
                 courseCodeField.setText(newV.getCourse_code());
                 courseNameField.setText(newV.getCourse_name());
                 creditsField.setText(String.valueOf(newV.getCredits()));
-                courseCodeField.setDisable(true); // Don't allow editing PK
+                courseCodeField.setDisable(true);
             } else {
                 clearCourseForm();
             }
@@ -136,10 +130,10 @@ public class ManageCoursesController {
             course.setCourse_name(name);
             course.setCredits(credits);
             
-            if (courseCodeField.isDisabled()) { // Updating existing course
+            if (courseCodeField.isDisabled()) {
                 courseDao.updateCourse(course);
                 setMessage("Course updated successfully.", Color.GREEN);
-            } else { // Saving new course
+            } else {
                 courseDao.saveCourse(course);
                 setMessage("Course saved successfully.", Color.GREEN);
             }
@@ -180,7 +174,6 @@ public class ManageCoursesController {
         }
 
         try {
-            // Must also delete sections and enrollments tied to this course first
             courseDao.deleteCourse(selected.getCourse_code());
             setMessage("Course deleted successfully.", Color.GREEN);
             loadAllCourses();
@@ -242,7 +235,7 @@ public class ManageCoursesController {
             try {
                 courseSectionDao.deleteSection(selected.getSection_id());
                 setMessage("Section deleted successfully.", Color.GREEN);
-                loadMySections(); // Refresh the table
+                loadMySections();
             } catch (Exception e) {
                 setMessage("Error deleting section.", Color.RED);
                 e.printStackTrace();
@@ -259,7 +252,7 @@ public class ManageCoursesController {
             periodStage.setScene(new Scene(root));
             periodStage.initModality(Modality.APPLICATION_MODAL);
             periodStage.showAndWait();
-            loadAllPeriods(); // Refresh the dropdown after closing
+            loadAllPeriods();
         } catch (IOException e) {
             setMessage("Could not open the periods window.", Color.RED);
             e.printStackTrace();

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class EnrollmentController {
 
     @FXML private Label sectionLabel;
-    @FXML private TextField searchField; // New UI component
+    @FXML private TextField searchField;
     @FXML private ListView<Student> allStudentsListView;
     @FXML private ListView<Student> enrolledStudentsListView;
     @FXML private Label messageLabel;
@@ -32,40 +32,32 @@ public class EnrollmentController {
     private final StudentDao studentDao = new StudentDaoImpl();
     private final EnrollmentDao enrollmentDao = new EnrollmentDaoImpl();
 
-    // Master list for unenrolled students
     private final ObservableList<Student> unenrolledStudentsMaster = FXCollections.observableArrayList();
-    // Filtered list that will be displayed to the user
     private FilteredList<Student> filteredUnenrolledStudents;
-    // List for enrolled students
     private final ObservableList<Student> enrolledStudents = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        // Wrap the master list in a filtered list
         filteredUnenrolledStudents = new FilteredList<>(unenrolledStudentsMaster, p -> true);
         
-        // Bind the list views to their respective lists
         allStudentsListView.setItems(filteredUnenrolledStudents);
         enrolledStudentsListView.setItems(enrolledStudents);
 
-        // Add a listener to the search field to filter the list as the user types
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredUnenrolledStudents.setPredicate(student -> {
                 if (newValue == null || newValue.isEmpty()) {
-                    return true; // If search text is empty, display all students
+                    return true;
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
-                // Match against student name or registration number
                 if (student.getName().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 } else if (student.getReg_number().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 }
-                return false; // Does not match
+                return false;
             });
         });
 
-        // Customize how students are displayed in the lists
         javafx.util.Callback<ListView<Student>, ListCell<Student>> cellFactory = lv -> new ListCell<>() {
             @Override
             protected void updateItem(Student student, boolean empty) {
@@ -84,17 +76,13 @@ public class EnrollmentController {
     }
 
     private void loadStudents() {
-        // Get all students in the system
         List<Student> allStudentsInDb = studentDao.getAllStudents();
 
-        // Get students already enrolled in this section
         List<Enrollment> enrollments = enrollmentDao.getEnrollmentsBySection(currentSection.getSection_id());
         List<Student> enrolledStudentsInDb = enrollments.stream().map(Enrollment::getStudent).collect(Collectors.toList());
 
-        // Populate the "enrolled" list
         enrolledStudents.setAll(enrolledStudentsInDb);
 
-        // Populate the master "unenrolled" list (this now works correctly because of equals/hashCode in Student.java)
         allStudentsInDb.removeAll(enrolledStudentsInDb);
         unenrolledStudentsMaster.setAll(allStudentsInDb);
     }
@@ -113,7 +101,6 @@ public class EnrollmentController {
 
         try {
             enrollmentDao.saveEnrollment(newEnrollment);
-            // Move the student from the master unenrolled list to the enrolled list
             unenrolledStudentsMaster.remove(selectedStudent);
             enrolledStudents.add(selectedStudent);
             setMessage("Student enrolled successfully.", Color.GREEN);
@@ -131,7 +118,6 @@ public class EnrollmentController {
             return;
         }
 
-        // Find the specific enrollment record to delete it
         List<Enrollment> enrollments = enrollmentDao.getEnrollmentsBySection(currentSection.getSection_id());
         Enrollment toDelete = enrollments.stream()
                 .filter(e -> e.getStudent().getReg_number().equals(selectedStudent.getReg_number()))
@@ -140,7 +126,6 @@ public class EnrollmentController {
         if (toDelete != null) {
             try {
                 enrollmentDao.deleteEnrollment(toDelete.getEnrollment_id());
-                // Move student from the enrolled list back to the master unenrolled list
                 enrolledStudents.remove(selectedStudent);
                 unenrolledStudentsMaster.add(selectedStudent);
                 setMessage("Student unenrolled successfully.", Color.GREEN);

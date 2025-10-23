@@ -119,14 +119,13 @@ public class MarkAttendanceController {
 
         try {
             for (AttendanceEntry entry : attendanceEntries) {
-                // Check if attendance already exists for this student in this session
                 Optional<Attendance> existingRecord = attendanceDao.getAttendanceForStudentInSession(currentSession.getSession_id(), entry.getStudent().getReg_number());
                 
                 Attendance record;
                 if(existingRecord.isPresent()) {
-                    record = existingRecord.get(); // We will update this record
+                    record = existingRecord.get();
                 } else {
-                    record = new Attendance(); // This is a new record
+                    record = new Attendance();
                     record.setClassSession(currentSession);
                     record.setStudent(entry.getStudent());
                 }
@@ -151,7 +150,6 @@ public class MarkAttendanceController {
         messageLabel.setTextFill(color);
     }
     
-    // Inner class for TableView
     public static class AttendanceEntry {
         private final Student student;
         private final ComboBox<String> statusComboBox;

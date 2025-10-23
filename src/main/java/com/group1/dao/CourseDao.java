@@ -9,5 +9,5 @@ public interface CourseDao {
     void deleteCourse(String courseCode);
     Course getCourseByCode(String courseCode);
     List<Course> getAllCourses();
-    boolean hasAttendanceRecords(String courseCode); // New method
+    boolean hasAttendanceRecords(String courseCode);
 }

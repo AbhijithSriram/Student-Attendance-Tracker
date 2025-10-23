@@ -1,6 +1,6 @@
 package com.group1.ui;
 
-import com.group1.model.Professor; // <-- THIS LINE WAS MISSING
+import com.group1.model.Professor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +25,7 @@ public class AttendanceTrackerApp extends Application {
             Parent root = loader.load();
             
             LoginController controller = loader.getController();
-            controller.setApp(this); // Give the controller a reference to this main app
+            controller.setApp(this);
 
             primaryStage.setTitle("Attendance Tracker - Login");
             primaryStage.setScene(new Scene(root));
@@ -41,7 +41,7 @@ public class AttendanceTrackerApp extends Application {
             Parent root = loader.load();
             
             DashboardController controller = loader.getController();
-            controller.setApp(this); // Give the controller a reference to this main app
+            controller.setApp(this);
             controller.initData(professor);
 
             primaryStage.setTitle("Attendance Dashboard");

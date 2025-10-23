@@ -34,10 +34,8 @@ public class ManageSessionsController {
         statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusComboBoxProperty());
         attendanceTableView.setItems(attendanceEntries);
 
-        // Listen for course section selection
         courseSectionComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> loadSessionsForSection(newV));
         
-        // Listen for session selection
         sessionsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> loadAttendanceForSession(newV));
     }
 
@@ -114,7 +112,6 @@ public class ManageSessionsController {
         messageLabel.setTextFill(color);
     }
 
-    // Inner class for TableView
     public static class AttendanceEntry {
         private final Student student;
         private final ComboBox<String> statusComboBox;

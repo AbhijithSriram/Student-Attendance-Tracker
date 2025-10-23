@@ -42,7 +42,6 @@ public class StudentDaoImpl implements StudentDao {
             transaction = session.beginTransaction();
             Student student = session.get(Student.class, regNumber);
             if (student != null) {
-                // Before deleting student, delete related enrollments and attendance
                 session.createMutationQuery("delete from Attendance where student.reg_number = :regNo").setParameter("regNo", regNumber).executeUpdate();
                 session.createMutationQuery("delete from Enrollment where student.reg_number = :regNo").setParameter("regNo", regNumber).executeUpdate();
                 session.remove(student);

@@ -43,7 +43,7 @@ public class LoginController {
         Professor professor = professorDao.getProfessorById(employeeId);
 
         if (professor != null && BCrypt.checkpw(password, professor.getPassword_hash())) {
-            app.showDashboard(professor); // Call main app to switch scenes
+            app.showDashboard(professor);
         } else {
             messageLabel.setText("Invalid Employee ID or Password.");
         }

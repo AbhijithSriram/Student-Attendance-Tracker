@@ -21,7 +21,6 @@
             <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="All Students (Unenrolled)" />
-                  <!-- Search bar added -->
                   <TextField fx:id="searchField" promptText="Search by name or registration number..." />
                   <ListView fx:id="allStudentsListView" VBox.vgrow="ALWAYS" />
                </children>

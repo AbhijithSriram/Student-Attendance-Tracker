@@ -31,7 +31,6 @@ public class ManageAcademicPeriodsController {
         periodTableView.setItems(periodList);
         loadAllPeriods();
 
-        // Listener to populate the form when a table row is selected
         periodTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 yearField.setText(newSelection.getAcademic_year());
@@ -53,7 +52,7 @@ public class ManageAcademicPeriodsController {
         AcademicPeriod selectedPeriod = periodTableView.getSelectionModel().getSelectedItem();
 
         try {
-            if (selectedPeriod == null) { // Creating new
+            if (selectedPeriod == null) {
                 AcademicPeriod newPeriod = new AcademicPeriod();
                 newPeriod.setAcademic_year(year);
                 newPeriod.setSemester(semester);

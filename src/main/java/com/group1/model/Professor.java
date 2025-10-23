@@ -14,7 +14,7 @@ public class Professor {
 
     private String name;
 
-    @Column(unique = true) // Enforce unique constraint
+    @Column(unique = true)
     private String email;
 
     private String password_hash;

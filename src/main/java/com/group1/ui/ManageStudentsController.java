@@ -35,7 +35,7 @@ public class ManageStudentsController {
             if (newV != null) {
                 regNumberField.setText(newV.getReg_number());
                 nameField.setText(newV.getName());
-                regNumberField.setDisable(true); // Don't allow editing PK
+                regNumberField.setDisable(true);
             } else {
                 clearForm();
             }
@@ -57,10 +57,10 @@ public class ManageStudentsController {
         student.setName(name);
 
         try {
-            if (regNumberField.isDisabled()) { // Updating
+            if (regNumberField.isDisabled()) {
                 studentDao.updateStudent(student);
                 setMessage("Student updated successfully.", Color.GREEN);
-            } else { // Saving new
+            } else {
                 studentDao.saveStudent(student);
                 setMessage("Student added successfully.", Color.GREEN);
             }
