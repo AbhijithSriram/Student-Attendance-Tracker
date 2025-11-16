@@ -71,7 +71,7 @@ public class EnrollmentController {
 
     public void initData(CourseSection section) {
         this.currentSection = section;
-        sectionLabel.setText("Managing Roster for: " + section.getCourse().getCourse_name() + " (" + section.getSection_name() + ")");
+        sectionLabel.setText("Managing Roster for: " + section.getCourse().getCourse_name() + " (" + section.getSectionDisplayName() + ")");
         loadStudents();
     }
 

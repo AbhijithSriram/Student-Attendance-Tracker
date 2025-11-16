@@ -3,12 +3,15 @@ package com.group1.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ATTENDANCE")
+@Table(name = "ATTENDANCE",
+       uniqueConstraints = @UniqueConstraint(columnNames = {"session_id", "reg_number"}))
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int attendance_id;
-    private String status;
+
+    @Column(nullable = false)
+    private String status; // Present, Absent, Late
 
     @ManyToOne
     @JoinColumn(name = "session_id", nullable = false)

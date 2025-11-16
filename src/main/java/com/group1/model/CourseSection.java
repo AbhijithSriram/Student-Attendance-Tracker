@@ -3,13 +3,19 @@ package com.group1.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "COURSE_SECTION")
+@Table(name = "COURSE_SECTION",
+       uniqueConstraints = @UniqueConstraint(columnNames = {"group_id", "section_letter", "course_code", "period_id"}))
 public class CourseSection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int section_id;
 
-    private String section_name;
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
+    private StudentGroup studentGroup;
+
+    @Column(nullable = false, length = 1)
+    private String section_letter; // A, B, C, etc.
 
     @ManyToOne
     @JoinColumn(name = "course_code", nullable = false)
@@ -32,12 +38,20 @@ public class CourseSection {
         this.section_id = section_id;
     }
 
-    public String getSection_name() {
-        return section_name;
+    public StudentGroup getStudentGroup() {
+        return studentGroup;
     }
 
-    public void setSection_name(String section_name) {
-        this.section_name = section_name;
+    public void setStudentGroup(StudentGroup studentGroup) {
+        this.studentGroup = studentGroup;
+    }
+
+    public String getSection_letter() {
+        return section_letter;
+    }
+
+    public void setSection_letter(String section_letter) {
+        this.section_letter = section_letter;
     }
 
     public Course getCourse() {
@@ -62,5 +76,18 @@ public class CourseSection {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    // Helper method to get section display name
+    public String getSectionDisplayName() {
+        if (studentGroup != null && course != null) {
+            return studentGroup.getGroup_code() + " Section " + section_letter + " - " + course.getCourse_name();
+        }
+        return "Section " + section_letter;
+    }
+
+    @Override
+    public String toString() {
+        return getSectionDisplayName();
     }
 }

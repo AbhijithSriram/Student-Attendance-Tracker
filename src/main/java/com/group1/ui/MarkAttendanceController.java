@@ -58,7 +58,7 @@ public class MarkAttendanceController {
             @Override
             public String toString(CourseSection section) {
                 if (section == null) return null;
-                return String.format("%s - %s (%s - %s)", section.getCourse().getCourse_name(), section.getSection_name(),
+                return String.format("%s - %s (%s - %s)", section.getCourse().getCourse_name(), section.getSectionDisplayName(),
                         section.getAcademicPeriod().getAcademic_year(), section.getAcademicPeriod().getSemester());
             }
             @Override
@@ -80,19 +80,24 @@ public class MarkAttendanceController {
         }
 
         try {
+            // TODO: Update this to use Slot instead of start_time/end_time
+            setMessage("Session creation needs to be updated for new slot-based system. Please use the Slot selection UI.", Color.RED);
+
+            /*
+            // Future implementation:
             ClassSession session = new ClassSession();
             session.setCourseSection(section);
             session.setSession_date(Date.valueOf(date));
-            session.setStart_time(Time.valueOf(LocalTime.parse(startStr)));
-            session.setEnd_time(Time.valueOf(LocalTime.parse(endStr)));
+            session.setSlot(slot);  // Need to add UI for selecting Slot
             session.setTopic_covered(topic);
 
             this.currentSession = classSessionDao.saveSession(session);
             loadStudentsForSession(currentSession);
-            
+
             setMessage("Session created. Please mark attendance.", Color.GREEN);
             attendanceTableView.setDisable(false);
             saveButton.setDisable(false);
+            */
 
         } catch (DateTimeParseException e) {
             setMessage("Invalid time format. Use HH:MM.", Color.RED);

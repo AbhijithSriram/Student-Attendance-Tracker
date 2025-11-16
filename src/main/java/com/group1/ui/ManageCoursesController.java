@@ -193,12 +193,18 @@ public class ManageCoursesController {
             return;
         }
 
+        // TODO: Update this to use StudentGroup and section_letter
+        setMessage("Section creation needs to be updated for new schema. Please use the new Student Group-based system.", Color.RED);
+
+        /*
+        // Future implementation:
         CourseSection section = new CourseSection();
         section.setCourse(course);
         section.setAcademicPeriod(period);
-        section.setSection_name(name);
+        section.setStudentGroup(studentGroup);  // Need to add UI for selecting StudentGroup
+        section.setSection_letter("A");  // Need to add UI for section letter
         section.setProfessor(loggedInProfessor);
-        
+
         try {
             courseSectionDao.saveSection(section);
             setMessage("Course section created successfully.", Color.GREEN);
@@ -207,6 +213,7 @@ public class ManageCoursesController {
         } catch (Exception e) {
             setMessage("Error creating course section.", Color.RED);
         }
+        */
     }
     
     @FXML
@@ -227,7 +234,7 @@ public class ManageCoursesController {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Deletion");
-        alert.setHeaderText("Delete Section: " + selected.getCourse().getCourse_name() + " - " + selected.getSection_name());
+        alert.setHeaderText("Delete Section: " + selected.getCourse().getCourse_name() + " - " + selected.getSectionDisplayName());
         alert.setContentText("Are you sure? This will permanently delete the section and ALL associated attendance records.");
         Optional<ButtonType> result = alert.showAndWait();
 

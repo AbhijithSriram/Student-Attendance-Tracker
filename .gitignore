@@ -18,3 +18,9 @@ buildNumber.properties
 .idea
 codebase_consolidator.py
 codebase_consolidated.txt
+
+# Development documentation and conversation exports
+CLAUDE.md
+IMPLEMENTATION_SUMMARY.md
+MIGRATION_GUIDE.md
+2025-11-16-command-messageinit-is-analyzing-your-codebase.txt

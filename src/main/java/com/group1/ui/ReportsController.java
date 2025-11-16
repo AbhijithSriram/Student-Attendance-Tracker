@@ -58,7 +58,7 @@ public class ReportsController {
             @Override
             public String toString(CourseSection section) {
                 if (section == null) return null;
-                return String.format("%s - %s (%s - %s)", section.getCourse().getCourse_name(), section.getSection_name(),
+                return String.format("%s - %s (%s - %s)", section.getCourse().getCourse_name(), section.getSectionDisplayName(),
                         section.getAcademicPeriod().getAcademic_year(), section.getAcademicPeriod().getSemester());
             }
             @Override
